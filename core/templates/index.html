@@ -1,0 +1,496 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mushfiqur Rahman — Software Engineer & Web Developer</title>
+  <meta name="description" content="Personal portfolio of Mushfiqur Rahman: Software Engineer and Web Developer passionate about backend systems and scalable architectures." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #3b82f6;
+      --accent2: #8b5cf6;
+      --radius: 12px;
+      --shadow: 0 8px 30px rgba(2,6,23,0.6);
+      --transition: 0.25s;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 24px;
+      line-height: 1.6;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+
+    /* NAV */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      grid-column: 1 / -1;
+    }
+
+    .nav .brand {
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .nav .brand .dot { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: var(--radius);
+      transition: all var(--transition) ease;
+    }
+
+    .nav-links a:hover { 
+      background: rgba(255,255,255,0.05);
+      transform: translateY(-2px);
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 24px;
+      align-items: center;
+      grid-column: 1 / -1;
+    }
+
+    .hero-card, .profile-card {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-height: 320px;
+    }
+
+    .hero-card h1 {
+      font-size: clamp(28px, 4vw, 36px);
+      margin: 0;
+    }
+
+    .hero-card p {
+      color: var(--muted);
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .btn {
+      padding: 10px 18px;
+      border-radius: var(--radius);
+      font-weight: 700;
+      cursor: pointer;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      color: #04202a;
+      border: none;
+      transition: transform var(--transition);
+      text-decoration: none;
+      display: inline-block;
+      margin-right: 12px;
+      margin-bottom: 12px;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text);
+    }
+
+    .profile-card {
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, var(--accent), var(--accent2));
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: white;
+    }
+
+    /* SECTIONS */
+    .section {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-column: 1 / -1;
+    }
+
+    .card {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: transform var(--transition);
+    }
+
+    .card:hover { 
+      transform: translateY(-4px); 
+    }
+
+    .card h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* Full width card */
+    .card.full-width { 
+      grid-column: 1 / -1; 
+    }
+
+    /* Project & Skill cards */
+    .project, .skill {
+      padding: 20px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.02);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .project:last-child, .skill:last-child {
+      margin-bottom: 0;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .badge {
+      background: rgba(255,255,255,0.05);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* Lists */
+    ul {
+      margin: 8px 0 0 20px;
+      color: var(--muted);
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    li:last-child {
+      margin-bottom: 0;
+    }
+
+    strong {
+      color: var(--text);
+    }
+
+    /* CONTACT */
+    .contact-card {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contact-card input, .contact-card textarea {
+      padding: 12px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.1);
+      background: transparent;
+      color: var(--text);
+      font-size: 1rem;
+      outline: none;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .contact-card input:focus, .contact-card textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    /* FOOTER */
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      grid-column: 1 / -1;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width: 920px) {
+      .hero { 
+        grid-template-columns: 1fr; 
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .form-actions {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- NAV -->
+    <header class="nav">
+      <div class="brand">
+        <span class="dot">M</span>ushfiqur Rahman
+      </div>
+      <nav class="nav-links">
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-card">
+        <h1>👋 Hi, I'm Mushfiqur Rahman</h1>
+        <p>I'm a Software Engineer and Web Developer passionate about backend systems, scalable architectures, and impactful digital solutions. I love solving challenging problems, writing clean and maintainable code, and exploring new technologies to improve performance and user experience.</p>
+        <p>Currently pursuing a B.Sc. in Computer Science and Engineering at United International University, Dhaka, Bangladesh, I aim to evolve into a full-stack developer and contribute to innovative projects that merge software, AI, and automation.</p>
+        <div>
+          <a class="btn" href="#contact">Get in touch</a>
+          <a class="btn btn-outline" href="#projects">View projects</a>
+        </div>
+      </div>
+
+      <aside class="profile-card">
+        <div class="avatar">
+          <i class="fas fa-user"></i>
+        </div>
+        <div>
+          <div style="font-size:1.2rem; font-weight:700;">Mushfiqur Rahman</div>
+          <div style="color:var(--muted); margin-top:8px;">Software Engineer & Web Developer</div>
+          <div style="margin-top:12px;">
+            <a class="btn btn-outline" href="#contact" style="font-size:0.9rem;">Contact Me</a>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- TECHNICAL SKILLS & CURRENTLY EXPLORING -->
+    <section id="skills" class="section">
+      <div class="card">
+        <h2>🔧 Technical Skills</h2>
+        <ul>
+          <li><strong>Programming Languages:</strong> Python, C/C++, Java, JavaScript</li>
+          <li><strong>Databases:</strong> MySQL, PostgreSQL</li>
+          <li><strong>Frontend:</strong> HTML5, CSS, React.js, Bootstrap</li>
+          <li><strong>Backend:</strong> Django, Flask, Node.js</li>
+          <li><strong>Tools & Platforms:</strong> Git, GitHub, Docker, Postman, Figma</li>
+          <li><strong>Machine Learning & AI:</strong> NumPy, Matplotlib, PyTorch, Gemini AI</li>
+          <li><strong>Specialties:</strong> RESTful API Design, WebSockets, Object-Oriented Programming</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>🌱 Currently Exploring</h2>
+        <ul>
+          <li>Docker & Containerization – optimizing deployment and scalability</li>
+          <li>Roboflow – making dataset</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- FEATURED PROJECTS -->
+    <section id="projects" class="section">
+      <div class="card full-width">
+        <h2>🛠️ Featured Projects</h2>
+        <div class="project">
+          <h3>🧭 UniNav – University Navigation & Portal System</h3>
+          <p>Developed as a campus navigation and management platform for students and faculty.</p>
+          <ul>
+            <li>Built using Django and HTML/CSS/JavaScript with integrated Google Maps API</li>
+            <li>Features: Location-based navigation, class scheduling, announcements, and faculty-student interaction, realtime chat (websocket, gemini 1.5 (Nodejs))</li>
+            <li>Designed for accessibility, real-time updates, and modular expansion</li>
+          </ul>
+          <div class="badges">
+            <span class="badge">Django</span>
+            <span class="badge">HTML/CSS/JavaScript</span>
+            <span class="badge">Google Maps API</span>
+            <span class="badge">WebSocket</span>
+            <span class="badge">Node.js</span>
+            <span class="badge">Gemini 1.5</span>
+          </div>
+        </div>
+
+        <div class="project">
+          <h3>🖼️ YOLOv5 – Real-Time Object Detection System</h3>
+          <p>Developed an AI-based object detection system using YOLOv5 and PyTorch.</p>
+          <ul>
+            <li>Detects multiple objects in real-time from video streams or images</li>
+            <li>Trained on a custom dataset for specific use cases (e.g., safety monitoring or surveillance)</li>
+            <li>Integrated Python scripts for data preprocessing, inference, and visualization</li>
+            <li>Optimized for speed and accuracy on moderate hardware</li>
+          </ul>
+          <div class="badges">
+            <span class="badge">Python</span>
+            <span class="badge">PyTorch</span>
+            <span class="badge">YOLOv5</span>
+            <span class="badge">Computer Vision</span>
+          </div>
+        </div>
+
+        <div class="project">
+          <h3>⚡ Node.js Real-Time Communication System</h3>
+          <p>Developed a real-time messaging platform using Node.js and WebSockets.</p>
+          <ul>
+            <li>Enables instant communication between multiple clients with low latency</li>
+            <li>Built robust backend with event-driven architecture for handling concurrent connections</li>
+            <li>Features: Group chat, direct messaging, and broadcast notifications</li>
+            <li>Designed for scalability and reliable message delivery in real-time applications</li>
+          </ul>
+          <div class="badges">
+            <span class="badge">Node.js</span>
+            <span class="badge">WebSockets</span>
+            <span class="badge">Real-time</span>
+            <span class="badge">Event-driven Architecture</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="card full-width">
+    <h2>Contact Me</h2>
+    <p style="margin-bottom: 20px;">Interested in collaborating or have a question? Feel free to reach out!</p>
+    
+    <form class="contact-card" method="POST" action="/#contact">
+      {% csrf_token %}
+      
+      <div class="contact-grid">
+        <div>
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required />
+        </div>
+      </div>
+      
+      <div>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Hi Mushfiq, I wanted to..." rows="5" required></textarea>
+      </div>
+      
+      <div class="form-actions">
+        <button type="submit" class="btn">Send Message</button>
+        <div style="color:var(--muted); margin-top: 12px;">
+          or email directly: 
+          <a href="mailto:mushfiq@example.com" style="color:var(--accent); text-decoration:none; font-weight:700;">
+            mushfiq@example.com
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+    <footer class="footer">
+      © <span id="year"></span> Mushfiqur Rahman — Software Engineer & Web Developer
+    </footer>
+  </div>
+
+  {% if request %}
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const forms = document.querySelectorAll('form[method="POST"]');
+      forms.forEach(form => {
+        if (!form.querySelector('input[name="csrfmiddlewaretoken"]')) {
+          const token = document.querySelector('[name=csrfmiddlewaretoken]')?.value ||
+                        '{{ csrf_token }}';
+          if (token && token !== '{{ csrf_token }}') {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'csrfmiddlewaretoken';
+            input.value = token;
+            form.appendChild(input);
+          }
+        }
+      });
+    });
+  </script>
+{% endif %}
+</body>
+</html>
